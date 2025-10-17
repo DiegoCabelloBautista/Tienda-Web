@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+</head>
+<body>
+
+<?php if (isset($_SESSION["user"]) && $_SESSION["user"] !== false): ?>
+    <div style="background: #f0f0f0; padding: 10px; margin-bottom: 20px;">
+        <a href="index.php">Inicio</a> | 
+        <a href="index.php?c=carrito&a=view">Ver Carrito</a> | 
+        <a href="index.php?c=user&a=logout">Cerrar Sesión (<?php echo $_SESSION["user"]->getUsername(); ?>)</a>
+    </div>
+<?php else: ?>
+    <div style="background: #f0f0f0; padding: 10px; margin-bottom: 20px;">
+        <a href="index.php">Inicio</a> | 
+        <a href="index.php?c=user&a=register">Registrarse</a> | 
+        <a href="index.php?c=user&a=login">Iniciar Sesión</a>
+    </div>
+<?php endif; ?>
+
+<h2>Productos Disponibles</h2>
+
+<?php if (!empty($products)): ?>
+    <?php foreach ($products as $product): ?>
+        <div>
+            <h3><?php echo $product->getName(); ?></h3>
+            <p>Precio: $<?php echo $product->getPrice(); ?></p>
+            <p><?php echo $product->getDescription(); ?></p>
+            <?php if (isset($_SESSION["user"]) && $_SESSION["user"] !== false): ?>
+                <a href="index.php?c=product&a=add_to_cart&id=<?php echo $product->getId(); ?>">
+                    Comprar
+                </a>
+            <?php else: ?>
+                <p><small>Regístrate para comprar</small></p>
+            <?php endif; ?>
+        </div>
+        <hr>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>No hay productos disponibles.</p>
+<?php endif; ?>
+
+</body>
+</html>

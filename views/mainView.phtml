@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+</head>
+<body>
+    <nav>
+        <a href="index.php">Inicio</a>
+        <?php if (isset($_SESSION["user"]) && $_SESSION["user"]): ?>
+            <a href="index.php?c=carrito&a=view">Carrito</a>
+            <a href="index.php?c=user&a=logout">Cerrar Sesión (<?php echo $_SESSION["user"]->getUsername(); ?>)</a>
+        <?php else: ?>
+            <a href="index.php?c=user&a=login">Iniciar Sesión</a>
+            <a href="index.php?c=user&a=register">Registrarse</a>
+        <?php endif; ?>
+    </nav>
+ </main>
+</body>
+</html>

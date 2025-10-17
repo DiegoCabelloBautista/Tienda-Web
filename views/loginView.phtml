@@ -7,12 +7,21 @@
 </head>
 <body>
     <h2>Iniciar Sesión</h2>
-    <form action="index.php" method="POST">
+    
+    <?php if (isset($error)): ?>
+        <p style="color: red;"><?php echo $error; ?></p>
+    <?php endif; ?>
+    
+    <?php if (isset($success)): ?>
+        <p style="color: green;"><?php echo $success; ?></p>
+    <?php endif; ?>
+    
+    <form action="index.php?c=user&a=login" method="POST">
         <input type="text" name="username" placeholder="Nombre de usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <input type="submit" value="Entrar">
     </form>
     <br>
-    <a href="index.php?register=1">Registrarse</a>
+    <a href="index.php?c=user&a=register">Registrarse</a>
 </body>
 </html>

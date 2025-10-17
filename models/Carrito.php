@@ -1,5 +1,5 @@
 <?php
-public class Carrito
+class Carrito
 {
     private $id;
     private $userId;
@@ -31,8 +31,8 @@ public class Carrito
     public function getTotalPrecio()
     {
         $total = 0;
-        foreach ($this->products as $products) {
-            $total += $producto->getPrecio();
+        foreach ($this->products as $producto) {
+            $total += $producto->getPrice() * $producto->getQuantity();
         }
         return $total;
     }

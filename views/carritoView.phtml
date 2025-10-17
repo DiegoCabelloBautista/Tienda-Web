@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito</title>
+</head>
+<body>
+    <?php require_once("mainView.phtml"); // Incluir el encabezado y navegación ?>
+
+    <main>
+        <h2>Mi Carrito de Compras</h2>
+        <?php if (isset($error)): ?>
+            <p style="color: red;"><?php echo $error; ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($productsInCart)): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio por unidad</th>
+                        <th>Total</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($productsInCart as $product): ?>
+                        <tr>
+                            <td><?php echo $product->getName(); ?></td>
+                            <td><?php echo $product->getQuantity(); ?></td>
+                            <td>$<?php echo $product->getPrice(); ?></td>
+                            <td>$<?php echo $product->getPrice() * $product->getQuantity(); ?></td>
+                            <td><a href="index.php?c=carrito&a=remove&id=<?php echo $product->getId(); ?>">Eliminar</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p><strong>Total del Carrito: $<?php echo $carrito->getTotalPrecio(); ?></strong></p>
+            <p><a href="index.php?c=carrito&a=clear">Vaciar Carrito</a></p>
+            <p><a href="index.php?c=product&a=list">Seguir Comprando</a></p>
+        <?php else: ?>
+            <p>Tu carrito está vacío.</p>
+            <p><a href="index.php?c=product&a=list">Ir a la Tienda</a></p>
+        <?php endif; ?>
+    </main>
+
+</body>
+</html>
